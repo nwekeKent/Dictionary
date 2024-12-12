@@ -1,25 +1,28 @@
 "use client";
 
+import { ContentArea } from "@/components/header/content-area/ContentArea";
 import { Header } from "@/components/header/Header";
+import SearchInput from "@/components/SearchInput";
 import { useEffect, useState } from "react";
-import { sans_serif, serif, mono } from "./utils/fonts";
 
 export default function Home() {
-	const font = localStorage.getItem("font");
-	const [activeFont, setActiveFont] = useState(font);
+	const [activeFont, setActiveFont] = useState("mono");
 
 	useEffect(() => {
+		const font = localStorage.getItem("font");
 		if (font) {
-			return;
+			setActiveFont(font);
 		} else {
 			localStorage.setItem("font", "mono");
 			setActiveFont(font);
 		}
-	}, [font]);
+	}, [activeFont]);
 
 	return (
-		<main className={`app-wrapper font-${font}`}>
+		<main className={`app-wrapper font-${activeFont}`}>
 			<Header setActiveFont={setActiveFont} activeFont={activeFont} />
+			<SearchInput />
+			<ContentArea />
 		</main>
 	);
 }

@@ -23,12 +23,13 @@ export default {
 				neutral: {
 					white: "#FFFFFF",
 					"lighter-grey": "#F4F4F4",
-					"faded-grey": "E9E9E9",
+					"faded-grey": "#E9E9E9",
 					grey: "#757575",
 				},
 			},
 			fontSize: {
-				"heading-xl": "64px",
+				"heading-2xl": "64px",
+				"heading-xl": "32px",
 				"heading-lg": "24px",
 				"heading-sm": "20px",
 				"body-lg": "18px",

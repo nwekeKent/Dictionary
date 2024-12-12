@@ -49,7 +49,7 @@ export default function FontFilter({ setActiveFont, activeFont }) {
 			{/* Fonts Dropdown */}
 
 			{filterActive && (
-				<div className="w-[183px] h-[152px] rounded-2xl bg-neutral-white dark:bg-black-300 absolute right-[-10px] sm:right-7 mt-3 shadow-custom-light dark:shadow-custom-dark p-6">
+				<div className="w-[183px] h-[152px] rounded-2xl bg-neutral-white dark:bg-black-300 absolute z-10 right-[-10px] sm:right-7 mt-3 shadow-custom-light dark:shadow-custom-dark p-6">
 					{fonts.map((font, index) => {
 						return (
 							<p
