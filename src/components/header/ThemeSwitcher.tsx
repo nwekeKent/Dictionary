@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const ThemeSwitcher = () => {
 	const [mounted, setMounted] = useState(false);
-	const { theme, setTheme } = useTheme();
+	const { theme, resolvedTheme, setTheme } = useTheme();
 
 	// useEffect only runs on the client, so now we can safely show the UI
 	useEffect(() => {
@@ -21,7 +21,7 @@ export const ThemeSwitcher = () => {
 
 	return (
 		<React.Fragment>
-			{theme === "dark" ? (
+			{theme === "dark" || resolvedTheme === "dark" ? (
 				<Image
 					src="/assets/icons/toggle-dark.svg"
 					alt="toggle-dark"
