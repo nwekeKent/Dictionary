@@ -6,7 +6,7 @@ import { Error } from "@/components/content-area/Error";
 import { ContentArea } from "@/components/content-area/ContentArea";
 import { useDictionary } from "@/hooks/useDictionary";
 import { Header } from "@/components/header/Header";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Loading } from "@/components/content-area/Loading";
 
 export default function Home() {
@@ -44,7 +44,9 @@ export default function Home() {
 			) : !searchedWord ? (
 				<EmptyContent />
 			) : data ? (
-				<ContentArea data={data} />
+				<Suspense fallback={<Loading />}>
+					<ContentArea data={data} />
+				</Suspense>
 			) : null}
 		</main>
 	);
