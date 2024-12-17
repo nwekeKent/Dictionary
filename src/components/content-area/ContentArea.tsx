@@ -56,11 +56,11 @@ export const ContentArea = ({ data }: ContentAreaProps) => {
 							{meaning.definitions.map((definition, index) => {
 								return (
 									<React.Fragment key={index}>
-										<li className="text-black-200 dark:text-neutral-white md:text-body-lg text-body-sm leading-6 mb-[13]">
+										<li className="text-black-200 dark:text-neutral-white md:text-body-lg text-body-sm leading-6 mb-[13px]">
 											{definition.definition}
 
 											{definition.example && (
-												<span className="block text-neutral-grey md:text-body-lg text-body-sm mt-[13px]">
+												<span className="block text-neutral-grey md:text-body-lg text-body-sm mt-[10px] ">
 													{`"${definition.example}"`}
 												</span>
 											)}

@@ -6,30 +6,16 @@ import { Error } from "@/components/content-area/Error";
 import { ContentArea } from "@/components/content-area/ContentArea";
 import { useDictionary } from "@/hooks/useDictionary";
 import { Header } from "@/components/header/Header";
-import { useEffect, useState, Suspense } from "react";
+import { Suspense } from "react";
 import { Loading } from "@/components/content-area/Loading";
+import { useFont } from "@/hooks/useFont";
 
 export default function Home() {
-	const [activeFont, setActiveFont] = useState("mono");
-	const [mounted, setMounted] = useState(false);
+	const { activeFont, handleFontChange, mounted } = useFont();
 	const { searchedWord, loading, error, data, fetchWord } = useDictionary();
 
-	useEffect(() => {
-		const storedFont = localStorage.getItem("font") || "mono";
-		setActiveFont(storedFont);
-	}, []);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	const handleFontChange = (newFont: string) => {
-		localStorage.setItem("font", newFont);
-		setActiveFont(newFont);
-	};
-
 	if (!mounted) {
-		return null; // or a loading placeholder
+		return null;
 	}
 
 	return (
