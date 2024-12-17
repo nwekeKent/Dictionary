@@ -1,28 +1,51 @@
 "use client";
 
-import { ContentArea } from "@/components/header/content-area/ContentArea";
-import { Header } from "@/components/header/Header";
 import SearchInput from "@/components/SearchInput";
+import { EmptyContent } from "@/components/content-area/EmptyContent";
+import { Error } from "@/components/content-area/Error";
+import { ContentArea } from "@/components/content-area/ContentArea";
+import { useDictionary } from "@/hooks/useDictionary";
+import { Header } from "@/components/header/Header";
 import { useEffect, useState } from "react";
+import { Loading } from "@/components/content-area/Loading";
 
 export default function Home() {
 	const [activeFont, setActiveFont] = useState("mono");
+	const [mounted, setMounted] = useState(false);
+	const { searchedWord, loading, error, data, fetchWord } = useDictionary();
 
 	useEffect(() => {
-		const font = localStorage.getItem("font");
-		if (font) {
-			setActiveFont(font);
-		} else {
-			localStorage.setItem("font", "mono");
-			setActiveFont(font);
-		}
-	}, [activeFont]);
+		const storedFont = localStorage.getItem("font") || "mono";
+		setActiveFont(storedFont);
+	}, []);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	const handleFontChange = (newFont: string) => {
+		localStorage.setItem("font", newFont);
+		setActiveFont(newFont);
+	};
+
+	if (!mounted) {
+		return null; // or a loading placeholder
+	}
 
 	return (
-		<main className={`app-wrapper font-${activeFont}`}>
-			<Header setActiveFont={setActiveFont} activeFont={activeFont} />
-			<SearchInput />
-			<ContentArea />
+		<main className={`app-wrapper font-${activeFont} transition-all`}>
+			<Header setActiveFont={handleFontChange} activeFont={activeFont} />
+			<SearchInput onSearch={fetchWord} />
+
+			{loading ? (
+				<Loading />
+			) : error ? (
+				<Error />
+			) : !searchedWord ? (
+				<EmptyContent />
+			) : data ? (
+				<ContentArea data={data} />
+			) : null}
 		</main>
 	);
 }

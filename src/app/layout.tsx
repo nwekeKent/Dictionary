@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { sans_serif, serif, mono } from "./utils/fonts";
+import { sans, serif, mono } from "./utils/fonts";
 import "./globals.css";
 import { ModeProvider } from "@/providers/ModeProvider";
 
@@ -16,12 +16,10 @@ export default function RootLayout({
 	return (
 		<html
 			lang="en"
-			className={`${serif.variable} ${mono.variable} ${sans_serif.variable}`}
+			className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+			suppressHydrationWarning
 		>
-			<body
-				suppressHydrationWarning
-				className="py-6 sm:py-14  px-6 sm:px-10 dark:bg-black-400 bg-neutral-white"
-			>
+			<body className="py-6 sm:py-14  px-6 sm:px-10 dark:bg-black-400 bg-neutral-white">
 				<ModeProvider>{children}</ModeProvider>
 			</body>
 		</html>

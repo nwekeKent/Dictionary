@@ -39,11 +39,7 @@ export default {
 				"custom-light": "0px 5px 30px 0px rgba(0, 0, 0, 0.10)",
 				"custom-dark": "0px 5px 30px 0px #A445ED;",
 			},
-			fontFamily: {
-				sans_serif: ["var(--font-sans_serif)"],
-				serif: ["var(--font-serif)"],
-				mono: ["var(--font-mono)"],
-			},
+		
 		},
 	},
 	plugins: [],

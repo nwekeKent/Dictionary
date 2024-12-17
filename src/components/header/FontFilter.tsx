@@ -1,10 +1,46 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, {
+	useState,
+	Dispatch,
+	SetStateAction,
+	useEffect,
+	useRef,
+} from "react";
 
-export default function FontFilter({ setActiveFont, activeFont }) {
+interface FontFilterProps {
+	setActiveFont: (newFont: string) => void;
+	activeFont: string;
+}
+
+export default function FontFilter({
+	setActiveFont,
+	activeFont,
+}: FontFilterProps) {
 	const [filterActive, setFilterActive] = useState(false);
+	const [mounted, setMounted] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (
+				dropdownRef.current &&
+				!dropdownRef.current.contains(event.target as Node)
+			) {
+				setFilterActive(false);
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const handleToggle = () => {
 		setFilterActive(prev => !prev);
@@ -16,26 +52,30 @@ export default function FontFilter({ setActiveFont, activeFont }) {
 	};
 
 	const fonts = [
-		{ name: "Sans Serif", font: "sans_serif" },
+		{ name: "Sans Serif", font: "sans" },
 		{ name: "Serif", font: "serif" },
 		{ name: "Mono", font: "mono" },
 	];
 
 	const displayFontName = () => {
-		return activeFont?.replace("_", " ");
+		return activeFont.replace("_", " ");
 	};
 
-	// useEffect(() => {
-	// 	setActiveFont(localStorage.getItem("font"));
-	// }, [activeFont]);
+
+
+	// Only render content after component is mounted
+	if (!mounted) {
+		return null; // or a loading placeholder
+	}
 
 	return (
-		<div className="w-auto relative mr-4 sm:mr-8">
+		<div
+			className="w-auto relative mr-4 sm:mr-8"
+			ref={dropdownRef}
+			onClick={handleToggle}
+		>
 			<div className="flex gap-3 h-8 items-center pr-4 sm:pr-7 border-r border-r-neutral-faded-grey">
-				<p
-					className="font-bold text-body-lg  capitalize"
-					onClick={handleToggle}
-				>
+				<p className="font-bold text-body-lg  capitalize">
 					{displayFontName()}
 				</p>
 				<Image

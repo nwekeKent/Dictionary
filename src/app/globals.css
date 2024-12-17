@@ -13,3 +13,14 @@
 	max-width: 748px;
 	margin: 0 auto;
 }
+
+/* These classes are needed for proper font application */
+.font-sans {
+	font-family: var(--font-sans);
+}
+.font-serif {
+	font-family: var(--font-serif);
+}
+.font-mono {
+	font-family: var(--font-mono);
+}
