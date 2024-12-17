@@ -1,13 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, {
-	useState,
-	Dispatch,
-	SetStateAction,
-	useEffect,
-	useRef,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface FontFilterProps {
 	setActiveFont: (newFont: string) => void;
@@ -60,8 +54,6 @@ export default function FontFilter({
 	const displayFontName = () => {
 		return activeFont.replace("_", " ");
 	};
-
-
 
 	// Only render content after component is mounted
 	if (!mounted) {

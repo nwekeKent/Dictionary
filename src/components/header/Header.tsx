@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import FontFilter from "./FontFilter";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
